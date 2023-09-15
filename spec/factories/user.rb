@@ -1,0 +1,2 @@
+factory :user do
+end
