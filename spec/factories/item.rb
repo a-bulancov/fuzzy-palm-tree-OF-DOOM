@@ -1,2 +1,0 @@
-factory :item do
-end
