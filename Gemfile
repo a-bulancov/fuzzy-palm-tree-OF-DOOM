@@ -66,6 +66,8 @@ group :development, :test do
 
   gem 'ruby-prof', require: false
   gem 'stackprof', require: false
+
+  gem 'rswag'
 end
 
 group :development do
