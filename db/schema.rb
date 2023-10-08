@@ -10,17 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_08_182919) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_08_214427) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "orders", force: :cascade do |t|
-    t.datetime "ordered_at", precision: nil
+    t.datetime "ordered_at", precision: nil, null: false
     t.float "sum"
-    t.bigint "users_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["users_id"], name: "index_orders_on_users_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.string "filename", null: false
+    t.boolean "ready", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tokens", force: :cascade do |t|
@@ -31,7 +38,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_08_182919) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

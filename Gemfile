@@ -49,6 +49,8 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem 'sidekiq'
+gem 'caxlsx'
+gem 'byebug'
 
 gem 'dry-validation'
 gem 'dry-monads'
