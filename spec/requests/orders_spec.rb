@@ -37,7 +37,7 @@ RSpec.describe "Order requests", type: :request do
 
   context "when supplying sum filter" do
     it "creates a file generator worker with filtered order" do
-      expect(Orders::FileGeneratorWorker).to receive(:perform_async).with([filtered_by_sum.id], anything, anything)
+      expect(Orders::FileGeneratorWorker).to receive(:perform_async).with(*worker_params { [filtered_by_sum.id] })
       get "/orders", params: date_params.merge({ sum: "1000.0" }), headers: auth_headers
       expect(response).to have_http_status(:ok)
     end
@@ -45,7 +45,7 @@ RSpec.describe "Order requests", type: :request do
 
   context "when supplying name filter" do
     it "creates a file generator worker with filtered order" do
-      expect(Orders::FileGeneratorWorker).to receive(:perform_async).with([filtered_by_name.id], anything, anything)
+      expect(Orders::FileGeneratorWorker).to receive(:perform_async).with(*worker_params { [filtered_by_name.id] })
       get "/orders", params: date_params.merge({ user_name: "john cena" }), headers: auth_headers
       expect(response).to have_http_status(:ok)
     end
@@ -53,7 +53,7 @@ RSpec.describe "Order requests", type: :request do
 
   context "when supplying time filter" do
     it "creates a file generator worker with filtered order" do
-      expect(Orders::FileGeneratorWorker).to receive(:perform_async).with([filtered_by_date.id], anything, anything)
+      expect(Orders::FileGeneratorWorker).to receive(:perform_async).with(*worker_params { [filtered_by_date.id] })
       get "/orders", params: { start_date: "2023-10-09 03:00:00", end_date: "2023-10-09 04:00:00" },
                      headers: auth_headers
       expect(response).to have_http_status(:ok)
@@ -62,9 +62,13 @@ RSpec.describe "Order requests", type: :request do
 
   context "when supplying correct params" do
     it "create a file generator worker" do
-      expect(Orders::FileGeneratorWorker).to receive(:perform_async).with(Order.all.pluck(:id), anything, anything)
+      expect(Orders::FileGeneratorWorker).to receive(:perform_async).with(*worker_params { Order.all.pluck(:id) })
       get "/orders", params: date_params, headers: auth_headers
       expect(response).to have_http_status(:ok)
     end
   end
+end
+
+def worker_params
+  [yield, anything, anything]
 end
