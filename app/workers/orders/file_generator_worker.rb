@@ -1,6 +1,7 @@
 class Orders::FileGeneratorWorker
   include Sidekiq::Worker
 
+  # maybe it's better to call query object and create report here
   def perform(order_ids, filename, report_id)
     orders = Order.where(id: order_ids)
     Axlsx::Package.new do |package|
