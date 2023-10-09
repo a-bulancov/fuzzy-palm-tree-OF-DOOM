@@ -4,7 +4,8 @@ class OrdersController < ApplicationController
   def index
     orders = Orders::IndexQuery.call(order_params)
     identifier = SecureRandom.hex
-    Orders::FileGeneratorWorker.perform_async(orders.pluck(:id), identifier)
+    report = Report.create(filename: identifier)
+    Orders::FileGeneratorWorker.perform_async(orders.pluck(:id), identifier, report.id)
     render json: { identifier: identifier }, status: :ok
   rescue ActionController::ParameterMissing, Date::Error
     render_bad_request

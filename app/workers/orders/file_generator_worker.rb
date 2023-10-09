@@ -1,8 +1,7 @@
 class Orders::FileGeneratorWorker
   include Sidekiq::Worker
 
-  def perform(order_ids, filename)
-    report = Report.create(filename: filename)
+  def perform(order_ids, filename, report_id)
     orders = Order.where(id: order_ids)
     Axlsx::Package.new do |package|
       package.workbook.add_worksheet(name: "orders") do |sheet|
@@ -11,6 +10,6 @@ class Orders::FileGeneratorWorker
       end
       package.serialize("tmp/#{filename}.xlsx")
     end
-    report.update(ready: true)
+    Report.find(report_id).update(ready: true)
   end
 end
