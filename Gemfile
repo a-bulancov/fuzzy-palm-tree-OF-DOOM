@@ -50,7 +50,6 @@ gem "bootsnap", require: false
 
 gem 'sidekiq'
 gem 'caxlsx'
-gem 'byebug'
 
 gem 'dry-validation'
 gem 'dry-monads'
