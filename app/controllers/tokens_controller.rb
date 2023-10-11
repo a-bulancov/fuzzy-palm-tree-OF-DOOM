@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TokensController < ApplicationController
   def new
     token = Token.create(value: SecureRandom.hex, expires: 1.hour.from_now)

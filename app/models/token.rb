@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Token < ApplicationRecord
   def expired?
-    Time.now > expires
+    Time.current > expires
   end
 end

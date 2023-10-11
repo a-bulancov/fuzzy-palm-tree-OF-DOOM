@@ -1,7 +1,7 @@
 class Orders::IndexQuery
   def self.call(order_params)
-    start_date = Time.parse(order_params["start_date"])
-    end_date = Time.parse(order_params["end_date"])
+    start_date = Time.zone.parse(order_params["start_date"])
+    end_date = Time.zone.parse(order_params["end_date"])
     user_ids = User.where(name: order_params["user_name"]).pluck(:id) if order_params["user_name"].present?
 
     scope = Order.where(ordered_at: (start_date..end_date))

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 class Orders::FileGeneratorJob
   include Sidekiq::Job
 
-  # maybe it's better to call query object and create report here
   def perform(order_params, identifier)
     orders = Orders::IndexQuery.call(order_params)
     report = Report.create(filename: identifier)
