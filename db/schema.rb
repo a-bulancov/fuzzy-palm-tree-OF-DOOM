@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_08_214427) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_10_215050) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_08_214427) do
 
   create_table "tokens", force: :cascade do |t|
     t.string "value", null: false
-    t.datetime "expires", precision: nil
+    t.datetime "expires", precision: nil, null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
   end
@@ -41,6 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_08_214427) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_users_on_name"
   end
 
 end

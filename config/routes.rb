@@ -6,6 +6,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   get "token", to: "tokens#new"
-  get "orders", to: "orders#index"
-  resources :downloads, only: [:show]
+  resources :orders_reports, only: [:index, :show]
 end

@@ -2,8 +2,9 @@ class Order < ApplicationRecord
   belongs_to :user
 
   def serialize
-    attrs = attributes
-    attrs["user_id"] = user.name
-    attrs.values
+    attrs = attributes.dup
+    attrs["user_name"] = user.name
+    attrs.delete "user_id"
+    attrs
   end
 end

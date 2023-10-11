@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
     header = request.headers["Authentication"]
     token_value = header&.split&.second
     token = Token.find_by(value: token_value)
-    head :forbidden if header.blank? || token.blank? || token&.expired?
+    head :forbidden if token.blank? || token.expired?
   end
 end
