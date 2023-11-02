@@ -32,3 +32,5 @@
 
 # Ignore bundled gems
 /vendor/bundle
+
+config/database.yml
