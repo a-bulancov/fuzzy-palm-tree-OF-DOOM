@@ -1,0 +1,7 @@
+---
+:concurrency: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+:max_retries: 5
+:queues:
+  - default
+  - mailers
+:verbose: false
