@@ -80,4 +80,5 @@ group :test do
 
   gem 'test-prof'
   gem 'simplecov', require: false
+  gem 'email_spec'
 end

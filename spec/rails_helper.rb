@@ -6,6 +6,7 @@ require_relative '../config/environment'
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 require 'sidekiq/testing'
+require 'email_spec/rspec'
 Sidekiq::Testing.fake!
 require 'simplecov'
 SimpleCov.start

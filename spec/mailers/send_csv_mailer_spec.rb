@@ -1,25 +1,30 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe SendCsvMailer, type: :mailer do
+  include EmailSpec::Helpers
+  include EmailSpec::Matchers
+
+  let(:user) { create(:user, email: 'user@example.com', username: 'example_user') }
+  let(:file_content) { Tempfile.new('orders_report.csv') }
+
+  after do
+    file_content.close
+    file_content.unlink
+  end
+
   describe 'send_report' do
-    let(:user) { create(:user, email: 'user@example.com', username: 'example_user') }
-    let(:filename) { 'report_data' }
-    let(:mail) { SendCsvMailer.send_report(user.id, filename) }
+    let(:mail) { SendCsvMailer.send_report(user.id, file_content) }
 
-    it 'renders the headers' do
-      expect(mail.subject).to eq("CSV orders report for #{user.username}")
-      expect(mail.to).to eq([user.email])
-    end
+    it 'sends the CSV report to the user' do
+      expect(mail).to deliver_to(user.email)
+      expect(mail).to have_subject("CSV orders report for #{user.username}")
+      expect(mail).to have_body_text('Your requested file in attachments.')
 
-    it 'attaches the CSV file' do
-      attachment = mail.attachments['orders_report.csv']
-      expect(attachment).to be_present
-      expect(attachment.content_type).to eq('text/csv')
-      expect(attachment.body.raw_source).to eq(filename)
-    end
+      attachment = mail.attachments[0]
 
-    it 'includes the user in the mail body' do
-      expect(mail.body.encoded).to match(user.username)
+      expect(attachment).to be_a(Mail::Part)
+      expect(attachment.content_type).to start_with('text/csv')
+      expect(attachment.filename).to eq('orders_report.csv')
     end
   end
 end

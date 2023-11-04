@@ -144,6 +144,10 @@ GEM
       dry-initializer (~> 3.0)
       dry-schema (>= 1.12, < 2)
       zeitwerk (~> 2.6)
+    email_spec (2.2.2)
+      htmlentities (~> 4.3.3)
+      launchy (~> 2.1)
+      mail (~> 2.7)
     erubi (1.12.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -155,6 +159,7 @@ GEM
     ffi (1.16.3-java)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    htmlentities (4.3.4)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
@@ -431,6 +436,7 @@ DEPENDENCIES
   dry-monads
   dry-struct
   dry-validation
+  email_spec
   factory_bot_rails
   faker
   importmap-rails
