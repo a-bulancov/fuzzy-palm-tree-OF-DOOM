@@ -57,6 +57,7 @@ group :development, :test do
   gem 'rubocop-performance', require: false
   gem 'dotenv-rails'
   gem 'pry-rails'
+  gem 'faker'
 end
 
 group :development do
@@ -68,6 +69,7 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   gem "spring"
+  gem 'letter_opener_web', '~> 2.0'
 end
 
 group :test do
@@ -77,4 +79,5 @@ group :test do
   gem "webdrivers"
 
   gem 'test-prof'
+  gem 'simplecov', require: false
 end

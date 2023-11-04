@@ -93,6 +93,7 @@ GEM
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     diff-lcs (1.5.0)
+    docile (1.4.0)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -149,6 +150,8 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
+    faker (3.2.2)
+      i18n (>= 1.8.11, < 2)
     ffi (1.16.3-java)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -172,6 +175,15 @@ GEM
     json-schema (3.0.0)
       addressable (>= 2.8)
     language_server-protocol (3.17.0.3)
+    launchy (2.5.2)
+      addressable (~> 2.8)
+    letter_opener (1.8.1)
+      launchy (>= 2.2, < 3)
+    letter_opener_web (2.0.0)
+      actionmailer (>= 5.2)
+      letter_opener (~> 1.7)
+      railties (>= 5.2)
+      rexml
     loofah (2.21.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -348,6 +360,12 @@ GEM
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
       redis-client (>= 0.14.0)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.4)
     spoon (0.0.6)
       ffi
     spring (4.1.1)
@@ -414,8 +432,10 @@ DEPENDENCIES
   dry-struct
   dry-validation
   factory_bot_rails
+  faker
   importmap-rails
   jbuilder
+  letter_opener_web (~> 2.0)
   pg (~> 1.1)
   pry-rails
   puma (~> 5.0)
@@ -429,6 +449,7 @@ DEPENDENCIES
   ruby-prof
   selenium-webdriver
   sidekiq
+  simplecov
   spring
   sprockets-rails
   stackprof
