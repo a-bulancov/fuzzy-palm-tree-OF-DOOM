@@ -4,14 +4,11 @@ class OrderReportJob
   include Sidekiq::Worker
   queue_as :default
 
-  def perform(args)
+  def perform(user_id, args)
     args_hash = JSON.parse(args).symbolize_keys
-    user = User.find_by(username: args_hash[:username])
-    orders = FindOrders.new(Order.all).call(args_hash.merge(user_id: user.id))
 
-    return unless user
-
+    orders = FindOrders.new(Order.all).call(args_hash)
     orders_csv = orders.to_csv
-    SendCsvMailer.send_report(user.id, orders_csv).deliver_now
+    SendCsvMailer.send_report(user_id, orders_csv).deliver_now
   end
 end

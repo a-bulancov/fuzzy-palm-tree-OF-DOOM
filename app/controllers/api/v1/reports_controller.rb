@@ -7,8 +7,8 @@ class Api::V1::ReportsController < Api::V1::BaseController
     if prepaired_params.failure?
       render json: { errors: prepaired_params.errors.to_h }, status: :unprocessable_entity
     else
-      OrderReportJob.perform_async(report_params.to_h.symbolize_keys.to_json)
-      render json: { message: 'Report will be sent to your email', status: 'success' }
+      OrderReportJob.perform_async(@current_user.id, report_params.to_h.symbolize_keys.to_json)
+      render json: { message: 'Report will be sent to your email if any data found', status: 'success' }
     end
   end
 

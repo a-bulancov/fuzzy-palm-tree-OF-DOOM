@@ -8,6 +8,7 @@ RSpec.describe Api::V1::ReportsController, type: :controller do
       let(:valid_params) { { "username" => 'example_user', "from_price" => "10.0", "to_price" => "50.0" } }
 
       it 'enqueues a job and returns a success message' do
+        request.headers.merge!({'Authorization': 'test_token'})
         expect(CreateReportContract).to receive(:new).and_return(contract_double = double)
         expect(contract_double).to receive(:call).with(valid_params).and_return(ValidationResult.new)
         expect(OrderReportJob).to receive(:perform_async)
