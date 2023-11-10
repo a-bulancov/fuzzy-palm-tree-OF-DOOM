@@ -5,4 +5,14 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  namespace :api do
+    namespace :admins do
+      resources :order_reports, only: %i[create] do
+        member do
+          post :export
+        end
+      end
+    end
+  end
 end

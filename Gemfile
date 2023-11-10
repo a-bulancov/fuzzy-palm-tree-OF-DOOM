@@ -50,11 +50,13 @@ gem "bootsnap", require: false
 
 gem 'sidekiq'
 
+gem 'carrierwave', '~> 3.0'
 gem 'dry-validation'
 gem 'dry-monads'
 gem 'dry-container'
 gem 'dry-auto_inject'
 gem 'dry-struct'
+gem 'ransack'
 
 gem 'blueprinter'
 
